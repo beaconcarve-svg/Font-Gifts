@@ -1,0 +1,148 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Font Preview Tool</title>
+
+<style>
+
+@font-face {
+      font-family: 'AlegreyaSC';
+      src: url('https://raw.githubusercontent.com/beaconcarve-svg/Font-Preview/main/Fonts_BC/AlegreyaSC-Medium.ttf') format('truetype');
+    }
+@font-face {
+      font-family: 'Atma';
+      src: url('https://raw.githubusercontent.com/beaconcarve-svg/Font-Preview/main/Fonts_BC/Atma-Regular.ttf') format('truetype');
+    }
+@font-face {
+      font-family: 'SFCompactRounded';
+      src: url('https://raw.githubusercontent.com/beaconcarve-svg/Font-Preview/main/Fonts_BC/SFCompactRounded.ttf') format('truetype');
+    }
+
+
+body {
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    color: #000000;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1 {
+    color: #30625C;
+    margin-bottom: 10px;
+}
+
+.instructions {
+    color: #555;
+    margin-bottom: 25px;
+}
+
+#userText {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    font-size: 18px;
+    border: 1px solid #314946;
+    border-radius: 6px;
+    margin-bottom: 30px;
+}
+
+.font-block {
+    padding: 20px 0;
+    border-bottom: 1px solid #dddddd;
+}
+
+.font-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #30625C;
+}
+
+.font-preview {
+    font-size: 32px;
+    line-height: 1.4;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Preview Available Fonts</h1>
+
+    <input
+        type="text"
+        id="userText"
+        placeholder="Type your text here"
+    >
+
+    <div id="allFontsPreview"></div>
+
+</div>
+
+<script>
+
+const fonts = [
+  { name: "Alegreya SC", class: "AlegreyaSC" },
+  { name: "Atma", class: "Atma" },
+  { name: "SF Compact Rounded", class: "SFCompactRounded" }
+];
+
+function updatePreviews() {
+
+    const text =
+        document.getElementById("userText").value ||
+        "Your preview text";
+
+    const container =
+        document.getElementById("allFontsPreview");
+
+    container.innerHTML = "";
+
+    fonts.forEach(font => {
+
+        const block =
+            document.createElement("div");
+
+        block.className = "font-block";
+
+        block.innerHTML = `
+            <div class="font-name">
+                ${font.name}
+            </div>
+
+            <div
+                class="font-preview"
+                style="font-family:'${font.class}';"
+            >
+                ${text}
+            </div>
+        `;
+
+        container.appendChild(block);
+
+    });
+}
+
+document
+    .getElementById("userText")
+    .addEventListener("input", updatePreviews);
+
+updatePreviews();
+
+</script>
+
+</body>
+</html>
